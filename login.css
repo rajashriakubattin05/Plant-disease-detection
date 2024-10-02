@@ -1,0 +1,23 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  background-image: url(img1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+  
+
+}
+.loginform{
+  background-color: #ffffcc;
+  border-radius: 3px;
+  height: auto;
+  margin: 7% auto;
+  padding: 25px 10px;
+}
+.new1
+{
+  text-decoration: none;
+  margin-left: 10px;
+}

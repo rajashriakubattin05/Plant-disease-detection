@@ -1,0 +1,139 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="farmer.master.cs" Inherits="pdd.farmer" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
+    <title></title>
+
+    <style>
+      .bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px; /* Adjust padding as needed */
+}
+.chatbox
+{
+    margin-right: 10px; /* Adjust margin as needed */
+    background-color: #f0f0f0; /* Just for visualization */
+    padding: 10px;
+      overflow:auto;
+    }
+    
+    
+    .divchatbox
+    {
+        width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow:auto;
+        }
+
+
+.lbt
+{
+    text-transform:capitalize;
+    }
+    </style>
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="signin.css" rel="Stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <nav class="navbar navbar-expand-lg" style="background-color:rgba(255,255,255,0.8)">
+  <div class="container-fluid"> 
+    <a class="navbar-brand" href="#">Farmer Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="farmer_home.aspx">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="history.aspx">History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="farmer_change_password.aspx">Change Password</a>
+        </li>
+        <li class="nav-item">
+          <asp:LinkButton CommandArgument=<%#Eval("mobile")%> runat="server" ID="lbtnlogout" class="nav-link" text="Logout" 
+                CausesValidation="false" onclick="lbtnlogout_Click"></asp:LinkButton>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+
+
+        <div >
+
+        <asp:Panel runat="server" ID="panelchat" Visible="false">
+
+         <div class="chatbox divchatbox" >
+            <asp:Repeater ID="repchat" runat="server">
+              
+                <ItemTemplate>
+                    <p style="font-size:12px"> <%#Eval("chatmsg")%> </p>
+                </ItemTemplate>
+            </asp:Repeater>
+
+
+
+           
+                
+
+                <asp:TextBox style="" runat="server" id="txtchat" class="form-control" placeholder="Enter Message"></asp:TextBox>
+                <asp:Button CausesValidation="false" runat="server" ID="btnsendchat" 
+                    Text="Send" onclick="btnsendchat_Click" > 
+               
+                </asp:Button>
+            </div>
+        </asp:Panel>
+
+
+
+            <div class="bottom-right" style="height:200px; width:200px; ">
+            <asp:Repeater runat="server" id="logedinfarmer" 
+                    onitemcommand="logedinfarmer_ItemCommand">
+                
+                <ItemTemplate>
+                    <div>
+                   <i class="fa-solid fa-circle fa-xs" style="color: #28d233;"></i>
+                    <asp:LinkButton CommandArgument=<%#Eval("mobile")%> CausesValidation="false" style="text-decoration:none;text-transform:capitalize" runat="server" ID="lbtnchatperson" Text=<%#Eval("fname")%>></asp:LinkButton>
+                    <br />
+                    </div>
+                </ItemTemplate>
+
+            </asp:Repeater>
+            </div>
+        </div>
+    </div>
+    </form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
